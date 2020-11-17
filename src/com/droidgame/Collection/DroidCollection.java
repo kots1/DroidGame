@@ -3,10 +3,15 @@ package com.droidgame.Collection;
 import com.droidgame.Weapon.WeaponInterface;
 import com.droidgame.model.Droid;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DroidCollection {
-    private final ArrayList<Droid> droids =new ArrayList<>();
+public class DroidCollection  {
+    private  ArrayList<Droid> droids ;
+
+    public DroidCollection(ArrayList<Droid> arrayList){
+        droids=arrayList;
+    }
 
     public void createDroid(){
         DroidScanner scan = new DroidScanner();
@@ -22,10 +27,27 @@ public class DroidCollection {
         WeaponInterface weapon =scan.chooseWeapon();
         droids.add(new Droid(name,healthy,damage,attack,defence,precision,maxEnergy,increaseEnergy,opportunityToDodge,weapon));
     }
+    public ArrayList<Droid> getArray(){
+        return droids;
+    }
+    public void printDroids(){
+        if(droids.isEmpty()){
+            System.out.println("Array is empty");
+            return;
+        }
+        int i =1;
+        System.out.println("List");
+        for (Droid droid:droids){
+            System.out.println((i++)+") "+droid);
+        }
+    }
 
-
+    public void deleteDroid(int index){
+        droids.remove(index);
+    }
 
     public Droid getDroid(int index){
         return droids.get(index);
     }
+
 }

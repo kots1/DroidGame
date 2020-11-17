@@ -13,4 +13,8 @@ public class shoes implements WeaponInterface{
     public void additionalFeatures(Droid droid) {
         droid.increaseOpportunityToDodge(increaseOpportunityToDodge);
     }
+    @Override
+    public String getName() {
+        return "shoes";
+    }
 }

@@ -15,4 +15,8 @@ public class shotgun implements WeaponInterface {
         droid.increaseAttack(increaseAttack);
         droid.increasePrecision(-decreasePrecision);
     }
+    @Override
+    public String getName() {
+        return "shotgun";
+    }
 }

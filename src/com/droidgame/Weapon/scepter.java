@@ -13,4 +13,9 @@ public class scepter  implements WeaponInterface{
     public void additionalFeatures(Droid droid) {
         droid.increaseEnergy(increaseEnergy);
     }
+
+    @Override
+    public String getName() {
+        return "scepter";
+    }
 }

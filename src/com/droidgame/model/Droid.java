@@ -2,9 +2,10 @@ package com.droidgame.model;
 
 import com.droidgame.Weapon.WeaponInterface;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Droid {
+public class Droid implements Serializable {
     private String name;
     private int  healthy;
     private int damage;
@@ -41,11 +42,9 @@ public class Droid {
     }
     @Override
     public String toString() {
-        return "Droid{" +
-                "name='" + name + '\'' +
+        return "name='" + name + '\'' +
                 ", healthy=" + healthy +
-                ", energy=" + energy +
-                '}';
+                ", energy=" + maxEnergy +", weapon= " +weapon.getName();
     }
 
     public Droid(String name, int healthy, int damage, int attack, int defence, int precision, int maxEnergy, int increaseEnergy, int opportunityToDodge, WeaponInterface weapon) {

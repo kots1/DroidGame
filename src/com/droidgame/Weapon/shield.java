@@ -13,4 +13,9 @@ public class shield implements WeaponInterface{
     public void additionalFeatures(Droid droid) {
         droid.increaseDefence(increaseDefence);
     }
+
+    @Override
+    public String getName() {
+        return "shield";
+    }
 }

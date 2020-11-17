@@ -15,4 +15,8 @@ public class sniper implements WeaponInterface{
         droid.increaseAttack(increaseAttack);
         droid.increasePrecision(increasePrecision);
     }
+    @Override
+    public String getName() {
+        return "sniper";
+    }
 }
