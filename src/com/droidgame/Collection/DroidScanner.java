@@ -1,6 +1,7 @@
 package com.droidgame.Collection;
 
 import com.droidgame.Weapon.WeaponInterface;
+import com.droidgame.model.Droid;
 
 import java.util.Scanner;
 
@@ -8,6 +9,13 @@ public class DroidScanner {
     private final Scanner scanner =new Scanner(System.in);
 
     private final WeaponCollection weaponCollection;
+
+    public Droid chooseDroid(DroidCollection droidCollection){
+        droidCollection.printDroids();
+        System.out.println("Choose droid");
+        int choice = scanner.nextInt();
+        return droidCollection.getDroid(choice-1);
+    }
 
     public DroidScanner(){
         weaponCollection=new WeaponCollection();

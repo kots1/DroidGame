@@ -1,8 +1,10 @@
 package com.droidgame;
 
 import com.droidgame.Collection.DroidCollection;
+import com.droidgame.Collection.DroidScanner;
 import com.droidgame.Collection.WeaponCollection;
 import com.droidgame.Weapon.*;
+import com.droidgame.arena.mainArena;
 import com.droidgame.model.Droid;
 
 import java.io.*;
@@ -10,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
-    private static final int PRINT =1;
-    private static final int CREATE =2;
-    private static final int DELETE =3;
-    private static final int EXIT =4;
+    private static final int PLAY =1;
+    private static final int PRINT =2;
+    private static final int CREATE =3;
+    private static final int DELETE =4;
+    private static final int EXIT =5;
 
     public static void main(String[] args) {
         Main main =new Main();
@@ -30,9 +32,18 @@ public class Main {
                     case PRINT -> droidCollection.printDroids();
                     case CREATE -> droidCollection.createDroid();
                     case DELETE -> delete(droidCollection);
+                    case PLAY -> play(droidCollection);
                 }
             }
         }
+    private void play(DroidCollection droidCollection){
+        DroidScanner scanner= new DroidScanner();
+        Droid firstDroid = scanner.chooseDroid(droidCollection);
+        Droid secondDroid = scanner.chooseDroid(droidCollection);
+        mainArena arena =new mainArena(firstDroid,secondDroid);
+        arena.Fight();
+    }
+
 
     private void delete(DroidCollection droidCollection) {
         droidCollection.printDroids();
@@ -43,10 +54,11 @@ public class Main {
 
     private int chooseItemOfMenu(){
         System.out.println("\nMenu:");
-        System.out.println("1)print exist droid");
-        System.out.println("2)create droid");
-        System.out.println("3)delete droid");
-        System.out.println("4)exit");
+        System.out.println("1)play");
+        System.out.println("2)print exist droids");
+        System.out.println("3)create droid");
+        System.out.println("4)delete droid");
+        System.out.println("5)exit");
         return new Scanner(System.in).nextInt();
     }
 

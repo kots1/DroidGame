@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Droid implements Serializable {
     private String name;
+    private int maxHealth;
     private int  healthy;
     private int damage;
     private int attack;
@@ -17,6 +18,10 @@ public class Droid implements Serializable {
     private int maxEnergy;
     private int increaseEnergy;
     private WeaponInterface weapon;
+
+    public int getEnergy() {
+        return energy;
+    }
 
     public void increaseAttack(int attack) {
         this.attack += attack;
@@ -33,6 +38,8 @@ public class Droid implements Serializable {
     public void increaseOpportunityToDodge(int opportunityToDodge) {
         this.opportunityToDodge += opportunityToDodge;
     }
+
+    public void increaseMaxEnergy(int maxEnergy){this.maxEnergy+=maxEnergy; }
 
     public void increasePrecision(int precision){
         this.precision+=precision;
@@ -58,14 +65,24 @@ public class Droid implements Serializable {
         this.increaseEnergy=increaseEnergy;
         this.opportunityToDodge=opportunityToDodge;
         this.weapon=weapon;
+        this.maxHealth = healthy;
+        useWeapon();
     }
+
+    public void resetData(){
+        healthy=maxHealth;
+        energy=0;
+    }
+
     private void useWeapon(){
         weapon.additionalFeatures(this);
     }
+
     public boolean isAlive(){
         return healthy>0;
     }
-    public void everyRoundChanges(){
+
+    public void roundChange(){
         energy+=increaseEnergy;
         if(energy>=maxEnergy){
             energy=maxEnergy;

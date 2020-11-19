@@ -3,6 +3,8 @@ package com.droidgame.arena;
 import com.droidgame.model.Droid;
 
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class mainArena {
     private Droid firstDroid;
@@ -14,27 +16,52 @@ public class mainArena {
     }
     public void Fight()
     {
-        int round =1;
-        do{
-            attack(round,firstDroid,secondDroid);
-            if(!secondDroid.isAlive()){
-                break;
-            }
-            attack(++round,secondDroid,firstDroid);
-        }while (firstDroid.isAlive());
-        //System.out.println("The winner is "+attacker.getName());
+        Droid attacker =firstDroid;
+        Droid defender = secondDroid;
+        int round = 1;
+        int numAttack;
+        boolean isDodge;
+        do {
+            pause();
+            numAttack=attacker.doHit();
+            isDodge=defender.getHit(numAttack);
+            printInfo(round++,attacker,defender,numAttack,isDodge);
+            everyRoundChanges(attacker,defender);
+            if(!defender.isAlive()) break;
+            Droid tmp=attacker;
+            attacker=defender;
+            defender=tmp;
+        }while (defender.isAlive());
+        System.out.println("The winner is "+ attacker.getName());
+        firstDroid.resetData();
+        secondDroid.resetData();
     }
 
-    private void PrintInfo(int round,Droid attacker) {
-        System.out.println("---------------------");
-        System.out.println("Round "+round);
-        System.out.println(attacker.getName()+" do hit with damage "+attacker.doHit());
-        System.out.println(firstDroid);
-        System.out.println(secondDroid);
-        System.out.println("---------------------");
+    private void pause() {
+        new Scanner(System.in).nextLine();
     }
-    private void attack(int round,Droid attacker, Droid defender){
-        defender.getHit(attacker.doHit());
-        PrintInfo(round,attacker);
+
+
+    private void printInfo(int round, Droid attacker, Droid defender,int numAttack,boolean isDodge) {
+        System.out.println("Round "+round );
+        if(numAttack==0){
+            System.out.println(attacker.getName()+" missed(");
+        }
+        else
+            if (!isDodge){
+                System.out.println(defender.getName()+" dodged the attack!");
+                }
+        else {
+        System.out.println(attacker.getName()+" attacked " + defender.getName() + " remove "+numAttack +" health");
+        }
+        System.out.println("Info after round");
+        System.out.println(attacker.getName()+" (healthy = "+attacker.getHealthy()+ " energy = "+attacker.getEnergy()+")");
+        System.out.println(defender.getName()+" (healthy = "+defender.getHealthy()+ " energy = "+defender.getEnergy()+")");
     }
+
+    private void everyRoundChanges(Droid firstDroid,Droid secondDroid){
+        firstDroid.roundChange();
+        secondDroid.roundChange();
+    }
+
 }
