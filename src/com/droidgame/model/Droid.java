@@ -47,6 +47,14 @@ public class Droid implements Serializable {
             this.precision=100;
         }
     }
+
+    public void increaseHealthy(int healthy){
+        this.healthy+=healthy;
+        if(this.healthy>=maxHealth){
+            this.healthy=maxHealth;
+        }
+    }
+
     @Override
     public String toString() {
         return "name='" + name + '\'' +
@@ -67,6 +75,10 @@ public class Droid implements Serializable {
         this.weapon=weapon;
         this.maxHealth = healthy;
         useWeapon();
+    }
+
+    public void usedEnergy(int usedEnergy){
+        energy -=usedEnergy;
     }
 
     public void resetData(){
@@ -93,16 +105,16 @@ public class Droid implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getHealthy() {
         return Math.max(healthy, 0);
     }
 
     public int doHit(){
-        if(new Random().nextInt(100)>precision){
+        int random=new Random().nextInt(100);
+        if(random==1){
+            return damage+attack/100+50;
+        }
+        if(random>precision){
             return 0;
         }
         return damage+attack/100;
