@@ -5,14 +5,14 @@ import com.droidgame.Weapon.*;
 import java.util.ArrayList;
 
 public class WeaponCollection {
-    private ArrayList<WeaponInterface> arrayWeapon;
+    private ArrayList<Weapon> arrayWeapon;
 
-   public WeaponCollection(){
+    public WeaponCollection() {
         createArrayWeapon();
     }
 
-    private void createArrayWeapon(){
-         arrayWeapon=new ArrayList<>();
+    private void createArrayWeapon() {
+        arrayWeapon = new ArrayList<>();
         arrayWeapon.add(new scepter());
         arrayWeapon.add(new shield());
         arrayWeapon.add(new shoes());
@@ -20,16 +20,18 @@ public class WeaponCollection {
         arrayWeapon.add(new sniper());
     }
 
-    public void printWeapon(){
-       int i=1;
-        for (WeaponInterface weapon :arrayWeapon){
-            System.out.println((i++)+") "+weapon);
+    public void printWeapon() {
+        int i = 1;
+        for (Weapon weapon : arrayWeapon) {
+            System.out.println((i++) + ") " + weapon);
         }
     }
-    public WeaponInterface getWeapon(int index){
-       return arrayWeapon.get(index);
+
+    public Weapon getWeapon(int index) {
+        return arrayWeapon.get(index);
     }
-    public int getNumberOfWeapons(){
-       return arrayWeapon.size();
+
+    public int getNumberOfWeapons() {
+        return arrayWeapon.size();
     }
 }

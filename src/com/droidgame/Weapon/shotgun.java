@@ -2,12 +2,13 @@ package com.droidgame.Weapon;
 
 import com.droidgame.model.Droid;
 
-public class shotgun implements WeaponInterface {
+public class shotgun implements Weapon {
     private final int increaseAttack = 20;
     private final int decreasePrecision = 5;
+
     @Override
     public String toString() {
-        return "shotgun (increase attack = "+increaseAttack+",decrease precision = "+decreasePrecision+" %) ";
+        return "shotgun (increase attack = " + increaseAttack + ",decrease precision = " + decreasePrecision + " %) ";
     }
 
     @Override
@@ -15,6 +16,7 @@ public class shotgun implements WeaponInterface {
         droid.increaseAttack(increaseAttack);
         droid.increasePrecision(-decreasePrecision);
     }
+
     @Override
     public String getName() {
         return "shotgun";

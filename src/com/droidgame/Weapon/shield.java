@@ -2,11 +2,12 @@ package com.droidgame.Weapon;
 
 import com.droidgame.model.Droid;
 
-public class shield implements WeaponInterface{
+public class shield implements Weapon {
     private final int increaseDefence = 50;
+
     @Override
     public String toString() {
-        return "shield (increase defence = "+increaseDefence+")";
+        return "shield (increase defence = " + increaseDefence + ")";
     }
 
     @Override

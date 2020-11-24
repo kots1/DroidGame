@@ -2,12 +2,13 @@ package com.droidgame.Weapon;
 
 import com.droidgame.model.Droid;
 
-public class sniper implements WeaponInterface{
+public class sniper implements Weapon {
     private final int increaseAttack = 10;
     private final int increasePrecision = 5;
+
     @Override
     public String toString() {
-        return "sniper (increase attack = "+increaseAttack+",increase precision = "+increasePrecision+" %) ";
+        return "sniper (increase attack = " + increaseAttack + ",increase precision = " + increasePrecision + " %) ";
     }
 
     @Override
@@ -15,6 +16,7 @@ public class sniper implements WeaponInterface{
         droid.increaseAttack(increaseAttack);
         droid.increasePrecision(increasePrecision);
     }
+
     @Override
     public String getName() {
         return "sniper";
