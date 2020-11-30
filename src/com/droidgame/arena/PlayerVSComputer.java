@@ -1,43 +1,30 @@
 package com.droidgame.arena;
 
-import com.droidgame.Collection.SkillsCollection;
 import com.droidgame.model.Droid;
 
 import java.util.ArrayList;
 
-public class PlayerVSComputer extends mainArena{
+public class PlayerVSComputer extends templateArena {
 
     public PlayerVSComputer(ArrayList<Droid> firstTeam, ArrayList<Droid> secondTeam) {
         super(firstTeam, secondTeam);
     }
 
+    @Override
     public void Fight() {
-/*
-
-        int round = 1;
-        boolean isAttacked;
-        int numAttacker=0;
-        int numDefender=1;
-
+        int round=1;
         do {
             pause();
-            printInfoAboutDroids(droids[numAttacker], droids[numDefender]);
-            isAttacked= attack(round,droids[numAttacker],droids[numDefender]);
-            if (!isAttacked){
-                continue;
-            }
-            everyRoundChanges(droids[numAttacker], droids[numDefender]);
-
-            if (!droids[numDefender].isAlive()) {
+            printInfoAboutDroids(firstTeam,secondTeam);
+            attack(round++,chooseDroidWhichAttack(firstTeam),chooseDroidWhichIsAttacked(secondTeam),firstTeam,secondTeam);
+            if(isEnd()){
                 break;
             }
-            numAttacker=1-numAttacker;
-            numDefender=1-numDefender;
-            round++;
-        } while (droids[numDefender].isAlive());
-        System.out.println("The winner is " + droids[numAttacker].getName());
-        gameOver();
-*/
+            computerAttack(round++,secondTeam,firstTeam);
+            everyRoundChanges();
+        }while (!isEnd());
 
     }
+
+
 }

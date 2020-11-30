@@ -146,6 +146,9 @@ public class Droid implements Serializable {
             freezeDefence--;
             return false;
         }
+        if(damage == 0){
+            return false;
+        }
         if (new Random().nextInt(100) < opportunityToDodge) {
             return false;
         }

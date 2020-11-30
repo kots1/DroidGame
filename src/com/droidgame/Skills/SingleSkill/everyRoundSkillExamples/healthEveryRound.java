@@ -1,40 +1,41 @@
-package com.droidgame.Skills.everyRoundSkillExamples;
+package com.droidgame.Skills.SingleSkill.everyRoundSkillExamples;
 
+import com.droidgame.Skills.SingleSkill.SingleSkill;
 import com.droidgame.Skills.Skills;
 import com.droidgame.model.Droid;
 
-public class healthEveryRound extends Skills {
+public class healthEveryRound extends SingleSkill {
     private int healthEveryRound = 20;
     @Override
-    public void mainWork(Droid attacker, Droid defender) {
+    public void mainWork() {
         attacker.increaseHealthy(healthEveryRound);
     }
 
     public healthEveryRound() {
         this.countOfUse =6;
-        this.usedEnergy=700;
+        this.usedEnergy=1100;
     }
 
     @Override
     public String toString() {
-        return "increase health  ( " +
-                "health = " + healthEveryRound +
-                ", energy required = " + usedEnergy +
+        return "Increase health  ( " +
+                "energy required = " + usedEnergy +
+                ", health = " + healthEveryRound +
                 ", count round = " + countOfUse +
                 ')';
     }
 
     @Override
-    public void startSkill(Droid attacker, Droid defender) {
+    public void startSkill() {
         attacker.usedEnergy(usedEnergy);
     }
 
     @Override
-    public void endSkill(Droid attacker, Droid defender) {
+    public void endSkill() {
 
     }
     @Override
     public String getName() {
-        return "every round recovery";
+        return "Every round recovery";
     }
 }

@@ -1,9 +1,10 @@
-package com.droidgame.Skills.periodSkillExamples;
+package com.droidgame.Skills.SingleSkill.periodSkillExamples;
 
+import com.droidgame.Skills.SingleSkill.SingleSkill;
 import com.droidgame.Skills.Skills;
 import com.droidgame.model.Droid;
 
-public class DefenceBoost extends Skills {
+public class DefenceBoost extends SingleSkill {
     private int increaseDefence = 2000;
 
 
@@ -13,30 +14,31 @@ public class DefenceBoost extends Skills {
     }
 
     @Override
-    public void mainWork(Droid attacker, Droid defender) {
+    public void mainWork() {
     }
 
     @Override
-    public void startSkill(Droid attacker, Droid defender) {
+    public void startSkill() {
         attacker.increaseAttack(increaseDefence);
         attacker.usedEnergy(usedEnergy);
     }
 
     @Override
-    public void endSkill(Droid attacker, Droid defender) {
+    public void endSkill() {
         attacker.increaseAttack(-increaseDefence);
     }
 
     @Override
     public String toString() {
-        return "DefenceBoost (" +
-                "increase attack= " + increaseDefence +
-                " by " + countOfUse + " rounds, energy required= " + usedEnergy +
+        return "Defence boost (" +
+                "energy required = " + usedEnergy +
+                ", increase attack= " + increaseDefence +
+                " by " + countOfUse + " rounds, "+
                 ')';
     }
 
     @Override
     public String getName() {
-        return "defence boost";
+        return "Defence boost";
     }
 }

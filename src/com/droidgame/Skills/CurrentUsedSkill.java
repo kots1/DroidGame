@@ -1,28 +1,35 @@
 package com.droidgame.Skills;
 
+import com.droidgame.Skills.SingleSkill.SingleSkill;
+import com.droidgame.Skills.TeamSkill.TeamSkill;
 import com.droidgame.model.Droid;
+
+import java.util.ArrayList;
 
 public class CurrentUsedSkill {
     private Skills useSkill;
     private int count;
-    private Droid attacker;
-    private Droid defender;
 
-    public CurrentUsedSkill(Skills useSkill, Droid attacker, Droid defender) {
+    public void setTeamSkill(TeamSkill useSkill, Droid attacker , ArrayList<Droid>attackTeam, ArrayList<Droid>defenceTeam) {
         this.useSkill = useSkill;
-        this.attacker = attacker;
-        this.defender = defender;
         count = useSkill.getCountOfUse();
-        useSkill.startSkill(attacker, defender);
+        useSkill.SetDroids(attacker,attackTeam,defenceTeam);
+        useSkill.startSkill();
+    }
+    public void setSingleSkill(SingleSkill useSkill,Droid attacker, Droid defender){
+        this.useSkill = useSkill;
+        count = useSkill.getCountOfUse();
+        useSkill.SetDroids(attacker,defender);
+        useSkill.startSkill();
     }
 
     public boolean use() {
         if (count == 0) {
-            useSkill.endSkill(attacker, defender);
+            useSkill.endSkill();
             return false;
         }
         count--;
-        useSkill.mainWork(attacker, defender);
+        useSkill.mainWork();
         return true;
     }
 }

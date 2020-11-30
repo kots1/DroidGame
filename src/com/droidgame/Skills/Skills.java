@@ -10,11 +10,11 @@ public abstract class Skills implements Comparable<Skills>{
         return attacker.getEnergy() >= usedEnergy;
     }
 
-    public abstract void mainWork(Droid attacker, Droid defender);
+    public abstract void mainWork();
 
-    public abstract void startSkill(Droid attacker, Droid defender);
+    public abstract void startSkill();
 
-    public abstract void endSkill(Droid attacker, Droid defender);
+    public abstract void endSkill();
 
     public int getCountOfUse() {
         return countOfUse;

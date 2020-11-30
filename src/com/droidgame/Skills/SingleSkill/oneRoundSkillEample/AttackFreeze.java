@@ -1,40 +1,41 @@
-package com.droidgame.Skills.oneRoundSkillEample;
+package com.droidgame.Skills.SingleSkill.oneRoundSkillEample;
 
+import com.droidgame.Skills.SingleSkill.SingleSkill;
 import com.droidgame.Skills.Skills;
 import com.droidgame.model.Droid;
 
-public class AttackFreeze extends Skills {
-    private int round=2;
+public class AttackFreeze extends SingleSkill {
+    private int round=3;
     public AttackFreeze() {
-        usedEnergy=1500;
+        usedEnergy=1400;
         countOfUse =1;
     }
 
     @Override
-    public void mainWork(Droid attacker, Droid defender) {
+    public void mainWork() {
 
     }
 
     @Override
     public String toString() {
-        return "attack freeze ( " +
+        return "Attack freeze ( " +
                 "energy required = " + usedEnergy +
                 ", set attack freeze on " + round +
-                "rounds)";
+                " rounds)";
     }
 
     @Override
-    public void startSkill(Droid attacker, Droid defender) {
+    public void startSkill() {
         attacker.usedEnergy(usedEnergy);
         defender.setFreezeAttack(round);
     }
 
     @Override
-    public void endSkill(Droid attacker, Droid defender) {
+    public void endSkill() {
 
     }
     @Override
     public String getName() {
-        return "attack freeze";
+        return "Attack freeze";
     }
 }
