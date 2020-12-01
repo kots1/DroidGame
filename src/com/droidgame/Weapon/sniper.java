@@ -3,7 +3,7 @@ package com.droidgame.Weapon;
 import com.droidgame.model.Droid;
 
 public class sniper implements Weapon {
-    private final int increaseAttack = 10;
+    private final int increaseAttack = 60;
     private final int increasePrecision = 5;
 
     @Override

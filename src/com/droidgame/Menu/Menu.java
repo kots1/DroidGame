@@ -1,14 +1,13 @@
 package com.droidgame.Menu;
 
-import com.droidgame.Collection.DroidCollection;
-import com.droidgame.Collection.GameScanner;
+import com.droidgame.AdditionClasses.Collection.DroidCollection;
+import com.droidgame.AdditionClasses.GameScanner;
 import com.droidgame.arena.ComputerVSComputer;
 import com.droidgame.arena.PlayerVSComputer;
 import com.droidgame.arena.PlayerVSPlayer;
 import com.droidgame.arena.templateArena;
 import com.droidgame.model.Droid;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,15 +31,27 @@ public class Menu {
     }
 
     private void play(DroidCollection droidCollection) {
-
+        ArrayList<Droid> saveData= SaveData( droidCollection);
         templateArena arena = preGameSetting(droidCollection);
         arena.Fight();
-        droidCollection.reset();
-    }
+        droidCollection.setArray(saveData);
 
+    }
+    private ArrayList<Droid> SaveData(DroidCollection droidCollection){
+        ArrayList<Droid> copyArray =new ArrayList<>();
+        for (int i = 0; i < droidCollection.getArray().size(); i++) {
+            Droid save = new Droid(droidCollection.getArray().get(i));
+            copyArray.add(save);
+        }
+        return copyArray;
+    }
     private templateArena preGameSetting(DroidCollection droidCollection) {
         int countOfDroids = chooseCountOfDroids();
+        droidCollection.printDroids();
+        System.out.println("First team:");
         ArrayList<Droid> firstTeam = chooseTeam(countOfDroids, droidCollection);
+        droidCollection.printDroids();
+        System.out.println("Second team:");
         ArrayList<Droid> secondTeam = chooseTeam(countOfDroids, droidCollection);
         return createArena(firstTeam,secondTeam);
     }

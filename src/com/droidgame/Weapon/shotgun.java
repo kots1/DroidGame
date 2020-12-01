@@ -3,7 +3,7 @@ package com.droidgame.Weapon;
 import com.droidgame.model.Droid;
 
 public class shotgun implements Weapon {
-    private final int increaseAttack = 20;
+    private final int increaseAttack = 40;
     private final int decreasePrecision = 5;
 
     @Override

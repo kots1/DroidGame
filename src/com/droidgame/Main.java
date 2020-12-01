@@ -1,17 +1,11 @@
 package com.droidgame;
 
-import com.droidgame.Collection.DroidCollection;
-import com.droidgame.Collection.GameScanner;
+import com.droidgame.AdditionClasses.Collection.DroidCollection;
 import com.droidgame.Menu.Menu;
-import com.droidgame.arena.ComputerVSComputer;
-import com.droidgame.arena.PlayerVSComputer;
-import com.droidgame.arena.PlayerVSPlayer;
-import com.droidgame.arena.templateArena;
 import com.droidgame.model.Droid;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
@@ -19,7 +13,6 @@ public class Main {
         Main main = new Main();
         Menu menu = new Menu();
         DroidCollection droidCollection = main.inputDroidFromFile();
-        droidCollection.reset();
 
         menu.menu(droidCollection);
         main.gameOver(droidCollection);

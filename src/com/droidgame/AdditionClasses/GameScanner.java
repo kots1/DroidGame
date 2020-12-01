@@ -1,5 +1,7 @@
-package com.droidgame.Collection;
+package com.droidgame.AdditionClasses;
 
+import com.droidgame.AdditionClasses.Collection.DroidCollection;
+import com.droidgame.AdditionClasses.Collection.WeaponCollection;
 import com.droidgame.Weapon.Weapon;
 import com.droidgame.model.Droid;
 
@@ -8,7 +10,6 @@ import java.util.Scanner;
 public class GameScanner {
     private final Scanner scanner = new Scanner(System.in);
 
-    private final WeaponCollection weaponCollection;
 
     public int typeOfArena(){
         Scanner scanner=new Scanner(System.in);
@@ -28,17 +29,20 @@ public class GameScanner {
     }
 
     public Droid chooseDroid(DroidCollection droidCollection) {
-        droidCollection.printDroids();
         System.out.println("Choose droid");
-        int choice = scanner.nextInt();
-        return droidCollection.getDroid(choice - 1);
+        while (true) {
+            int choice = scanner.nextInt();
+            if (choice <= droidCollection.getCountOfDroids() && choice >= 0) {
+                if (choice == 0) {
+                    return null;
+                }
+                return droidCollection.getDroid(choice - 1);
+            }
+            System.out.print("Input error , try again :");
+        }
     }
 
-    public GameScanner() {
-        weaponCollection = new WeaponCollection();
-    }
-
-    public Weapon chooseWeapon() {
+    public Weapon chooseWeapon(WeaponCollection weaponCollection) {
         int choice;
         System.out.println("Choose weapon:\n0)none");
         weaponCollection.printWeapon();

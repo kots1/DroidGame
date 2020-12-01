@@ -22,7 +22,9 @@ public class CurrentUsedSkill {
         useSkill.SetDroids(attacker,defender);
         useSkill.startSkill();
     }
-
+    public void end(){
+        useSkill.endSkill();
+    }
     public boolean use() {
         if (count == 0) {
             useSkill.endSkill();

@@ -1,8 +1,7 @@
 package com.droidgame.Skills.SingleSkill.everyRoundSkillExamples;
 
 import com.droidgame.Skills.SingleSkill.SingleSkill;
-import com.droidgame.Skills.Skills;
-import com.droidgame.model.Droid;
+
 
 public class healthEveryRound extends SingleSkill {
     private int healthEveryRound = 20;

@@ -37,8 +37,8 @@ public class Droid implements Serializable {
         this.increaseEnergy += increaseEnergy;
     }
 
-    public void increaseEnergy(int energy) {
-        this.energy += energy;
+    public void increaseDamage(int damage) {
+        this.damage += damage;
     }
 
     public void increaseOpportunityToDodge(int opportunityToDodge) {
@@ -76,7 +76,11 @@ public class Droid implements Serializable {
     public String toString() {
         return "name='" + name + '\'' +
                 ", healthy=" + healthy +
-                ", energy=" + maxEnergy + ", weapon= " + weapon.getName();
+                ", energy=" + maxEnergy +
+                ", damage = "+damage+
+                ", attack = "+attack+
+                ", defence = "+defence+
+                ", weapon= " + weapon.getName();
     }
 
     public Droid(String name, int healthy, int damage, int attack, int defence, int precision, int maxEnergy, int increaseEnergy, int opportunityToDodge, Weapon weapon) {
@@ -94,13 +98,22 @@ public class Droid implements Serializable {
         useWeapon();
     }
 
-    public void usedEnergy(int usedEnergy) {
-        energy -= usedEnergy - increaseEnergy;
+    public Droid(Droid copy){
+        this.name = copy.name;
+        this.healthy = copy.healthy;
+        this.damage = copy.damage;
+        this.attack = copy.attack;
+        this.defence = copy.defence;
+        this.precision = copy.precision;
+        this.maxEnergy = copy.maxEnergy;
+        this.increaseEnergy = copy.increaseEnergy;
+        this.opportunityToDodge = copy.opportunityToDodge;
+        this.weapon = copy.weapon;
+        this.maxHealth = copy.healthy;
     }
 
-    public void resetData() {
-        healthy = maxHealth;
-        energy = 0;
+    public void usedEnergy(int usedEnergy) {
+        energy -= usedEnergy - increaseEnergy;
     }
 
     private void useWeapon() {
@@ -141,19 +154,20 @@ public class Droid implements Serializable {
         return damage + attack / 100;
     }
 
-    public boolean getHit(int damage) {
+    public int getHit(int damage) {
         if(freezeDefence!=0){
             freezeDefence--;
-            return false;
+            return 0;
         }
         if(damage == 0){
-            return false;
+            return 0;
         }
         if (new Random().nextInt(100) < opportunityToDodge) {
-            return false;
+            return 0;
         }
-        healthy -= (damage - defence / 100);
-        return true;
+        int healthDecrease =(damage - defence / 100);
+        healthy -= healthDecrease;
+        return healthDecrease;
 
     }
 }

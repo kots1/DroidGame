@@ -22,7 +22,8 @@ public class ComputerVSComputer extends templateArena {
             everyRoundChanges();
             swapTeam();
         }while (!isEnd());
-
+        printWinner();
+        GameOver();
     }
 
 

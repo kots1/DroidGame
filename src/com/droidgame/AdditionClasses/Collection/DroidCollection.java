@@ -1,5 +1,6 @@
-package com.droidgame.Collection;
+package com.droidgame.AdditionClasses.Collection;
 
+import com.droidgame.AdditionClasses.GameScanner;
 import com.droidgame.Weapon.Weapon;
 import com.droidgame.model.Droid;
 
@@ -23,14 +24,16 @@ public class DroidCollection {
         int maxEnergy = scan.inputData("max energy");
         int increaseEnergy = scan.inputData("each round of energy increase");
         int opportunityToDodge = scan.inputPercent("opportunity to dodge (0-100%)");
-        Weapon weapon = scan.chooseWeapon();
+        Weapon weapon = scan.chooseWeapon(new WeaponCollection());
         droids.add(new Droid(name, healthy, damage, attack, defence, precision, maxEnergy, increaseEnergy, opportunityToDodge, weapon));
     }
 
     public ArrayList<Droid> getArray() {
         return droids;
     }
-
+    public int getCountOfDroids(){
+        return droids.size();
+    }
     public void printDroids() {
         if (droids.isEmpty()) {
             System.out.println("Array is empty");
@@ -42,12 +45,10 @@ public class DroidCollection {
             System.out.println((i++) + ") " + droid);
         }
     }
-    public void reset(){
-        for (Droid droid:droids){
-            droid.resetData();
-        }
+    public void setArray(ArrayList<Droid> array){
+        droids.clear();
+        droids.addAll(array);
     }
-
     public void deleteDroid(int index) {
         droids.remove(index);
     }

@@ -1,4 +1,4 @@
-package com.droidgame.Collection;
+package com.droidgame.AdditionClasses.Collection;
 
 import com.droidgame.Weapon.*;
 
@@ -18,6 +18,7 @@ public class WeaponCollection {
         arrayWeapon.add(new shoes());
         arrayWeapon.add(new shotgun());
         arrayWeapon.add(new sniper());
+        arrayWeapon.add(new armor());
     }
 
     public void printWeapon() {

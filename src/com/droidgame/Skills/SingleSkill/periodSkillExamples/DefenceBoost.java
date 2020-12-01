@@ -1,11 +1,9 @@
 package com.droidgame.Skills.SingleSkill.periodSkillExamples;
 
 import com.droidgame.Skills.SingleSkill.SingleSkill;
-import com.droidgame.Skills.Skills;
-import com.droidgame.model.Droid;
 
 public class DefenceBoost extends SingleSkill {
-    private int increaseDefence = 2000;
+    private int increaseDefence = 1000;
 
 
     public DefenceBoost() {
@@ -19,13 +17,13 @@ public class DefenceBoost extends SingleSkill {
 
     @Override
     public void startSkill() {
-        attacker.increaseAttack(increaseDefence);
+        attacker.increaseDefence(increaseDefence);
         attacker.usedEnergy(usedEnergy);
     }
 
     @Override
     public void endSkill() {
-        attacker.increaseAttack(-increaseDefence);
+        attacker.increaseDefence(-increaseDefence);
     }
 
     @Override

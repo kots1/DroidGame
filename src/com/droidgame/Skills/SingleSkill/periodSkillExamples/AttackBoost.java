@@ -5,7 +5,7 @@ import com.droidgame.Skills.Skills;
 import com.droidgame.model.Droid;
 
 public class AttackBoost extends SingleSkill {
-    private int increaseAttack = 2000;
+    private int increaseAttack = 1000;
 
 
     public AttackBoost() {
