@@ -15,8 +15,7 @@ public class PlayerVSComputer extends templateArena {
         int round=1;
         do {
             pause();
-            printInfoAboutDroids(firstTeam,secondTeam);
-            System.out.println("Choose two droid (from your team and opponents)");
+            printInfoAboutDroids();
             attack(round++,chooseDroidFromTeam(firstTeam),chooseDroidFromTeam(secondTeam),firstTeam,secondTeam);
             if(isEnd()){
                 break;
@@ -25,7 +24,6 @@ public class PlayerVSComputer extends templateArena {
             everyRoundChanges();
         }while (!isEnd());
         printWinner();
-        GameOver();
     }
 
 

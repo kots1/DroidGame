@@ -63,9 +63,8 @@ public class GameScanner {
         return scanner.nextLine();
     }
 
-    public int inputData(String name) {
+    public int inputData() {
         int data;
-        System.out.print("Input " + name + " : ");
         while (true) {
             data = scanner.nextInt();
             if (data >= 0) {
@@ -75,12 +74,25 @@ public class GameScanner {
         }
     }
 
-    public int inputPercent(String name) {
+    public int inputPercent() {
         int data;
-        System.out.print("Input " + name + " : ");
         while (true) {
             data = scanner.nextInt();
             if (data >= 0 && data <= 100) {
+                return data;
+            }
+            System.out.print("Input error , try again :");
+        }
+    }
+
+    public int ChooseTypeOfDroid() {
+        int data;
+        System.out.print("Choose type of droids: ");
+        System.out.println("1) Standard droid");
+        System.out.println("2) Heal droid");
+        while (true) {
+            data = scanner.nextInt();
+            if (data >= 0 && data <= 2) {
                 return data;
             }
             System.out.print("Input error , try again :");

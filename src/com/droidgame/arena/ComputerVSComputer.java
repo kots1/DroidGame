@@ -16,14 +16,13 @@ public class ComputerVSComputer extends templateArena {
         ArrayList<Droid> defenceTeam=secondTeam;
         do {
             pause();
-            printInfoAboutDroids(firstTeam,secondTeam);
+            printInfoAboutDroids();
 
             computerAttack(round++,attackTeam,defenceTeam);
             everyRoundChanges();
             swapTeam();
         }while (!isEnd());
         printWinner();
-        GameOver();
     }
 
 

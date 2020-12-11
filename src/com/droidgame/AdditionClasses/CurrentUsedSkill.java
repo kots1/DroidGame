@@ -1,6 +1,7 @@
-package com.droidgame.Skills;
+package com.droidgame.AdditionClasses;
 
 import com.droidgame.Skills.SingleSkill.SingleSkill;
+import com.droidgame.Skills.Skills;
 import com.droidgame.Skills.TeamSkill.TeamSkill;
 import com.droidgame.model.Droid;
 
@@ -22,9 +23,7 @@ public class CurrentUsedSkill {
         useSkill.SetDroids(attacker,defender);
         useSkill.startSkill();
     }
-    public void end(){
-        useSkill.endSkill();
-    }
+
     public boolean use() {
         if (count == 0) {
             useSkill.endSkill();

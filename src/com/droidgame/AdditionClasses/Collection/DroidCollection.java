@@ -3,6 +3,7 @@ package com.droidgame.AdditionClasses.Collection;
 import com.droidgame.AdditionClasses.GameScanner;
 import com.droidgame.Weapon.Weapon;
 import com.droidgame.model.Droid;
+import com.droidgame.model.HealDroid;
 
 import java.util.ArrayList;
 
@@ -16,16 +17,31 @@ public class DroidCollection {
     public void createDroid() {
         GameScanner scan = new GameScanner();
         String name = scan.inputName();
-        int healthy = scan.inputData("healthy");
-        int damage = scan.inputData("damage");
-        int attack = scan.inputData("attack");
-        int defence = scan.inputData("defence");
-        int precision = scan.inputPercent("precision (0-100%)");
-        int maxEnergy = scan.inputData("max energy");
-        int increaseEnergy = scan.inputData("each round of energy increase");
-        int opportunityToDodge = scan.inputPercent("opportunity to dodge (0-100%)");
+        System.out.print("Input healthy: ");
+        int healthy = scan.inputData();
+        System.out.print("Input damage: ");
+        int damage = scan.inputData();
+        System.out.print("Input attack: ");
+        int attack = scan.inputData();
+        System.out.print("Input defence: ");
+        int defence = scan.inputData();
+        System.out.print("Input precision (0-100%): ");
+        int precision = scan.inputPercent();
+        System.out.print("Input max energy: ");
+        int maxEnergy = scan.inputData();
+        System.out.print("Input each round of energy increase: ");
+        int increaseEnergy = scan.inputData();
+        System.out.print("Input opportunity to dodge (0-100%): ");
+        int opportunityToDodge = scan.inputPercent();
         Weapon weapon = scan.chooseWeapon(new WeaponCollection());
+        int choice = scan.ChooseTypeOfDroid();
+        if(choice==1){
         droids.add(new Droid(name, healthy, damage, attack, defence, precision, maxEnergy, increaseEnergy, opportunityToDodge, weapon));
+        } else {
+            System.out.print("Input increase health: ");
+            int increaseHealth= scan.inputData();
+            droids.add(new HealDroid(name, healthy, damage, attack, defence, precision, maxEnergy, increaseEnergy, opportunityToDodge, weapon,increaseHealth));
+        }
     }
 
     public ArrayList<Droid> getArray() {

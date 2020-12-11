@@ -6,20 +6,20 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class Droid implements Serializable {
-    private String name;
-    private int maxHealth;
-    private int healthy;
-    private int damage;
-    private int attack;
-    private int defence;
-    private int opportunityToDodge;
-    private int precision;
-    private int energy;
-    private int maxEnergy;
-    private int increaseEnergy;
-    private int freezeAttack;
-    private int freezeDefence;
-    private Weapon weapon;
+    protected String name;
+    protected int maxHealth;
+    protected int healthy;
+    protected int damage;
+    protected int attack;
+    protected int defence;
+    protected int opportunityToDodge;
+    protected int precision;
+    protected int energy;
+    protected int maxEnergy;
+    protected int increaseEnergy;
+    protected int freezeAttack;
+    protected int freezeDefence;
+    protected Weapon weapon;
 
     public int getEnergy() {
         return energy;
@@ -75,7 +75,8 @@ public class Droid implements Serializable {
     @Override
     public String toString() {
         return "name='" + name + '\'' +
-                ", healthy=" + healthy +
+                ",type = standard droid,"+
+                "healthy=" + healthy +
                 ", energy=" + maxEnergy +
                 ", damage = "+damage+
                 ", attack = "+attack+

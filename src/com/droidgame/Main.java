@@ -13,7 +13,6 @@ public class Main {
         Main main = new Main();
         Menu menu = new Menu();
         DroidCollection droidCollection = main.inputDroidFromFile();
-
         menu.menu(droidCollection);
         main.gameOver(droidCollection);
     }

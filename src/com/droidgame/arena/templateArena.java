@@ -4,11 +4,12 @@ import com.droidgame.AdditionClasses.Collection.SkillsCollection;
 import com.droidgame.AdditionClasses.WorkWithSkill;
 import com.droidgame.Skills.Skills;
 import com.droidgame.model.Droid;
+import com.droidgame.model.HealDroid;
 
 import java.util.*;
 
 
-public class templateArena {
+public abstract class templateArena {
     protected ArrayList<Droid> firstTeam;
     protected ArrayList<Droid> secondTeam;
 
@@ -21,31 +22,49 @@ public class templateArena {
     }
 
 
-    public void Fight() { }
+    abstract public void Fight();
 
     protected void attack(int round, Droid attacker, Droid defender,ArrayList<Droid> attackTeam,ArrayList<Droid> defenceTeam) {
        while (true){
         int choice = chooseTypeOfAttack(attacker);
         if (choice == 1) {
-            defaultAttack(round, attacker, defender);
+            int powerOfAttack= defaultAttack( attacker, defender,attackTeam);
+            printInfoAboutAttack(round, attacker, defender,  powerOfAttack);
         } else if (choice == 2) {
-            boolean isUsed = skills.useSkills(attacker,defender,attackTeam,defenceTeam);
-            if (!isUsed) {
+            Skills useSkills = useSkills(attacker,defender,attackTeam,defenceTeam);
+            if (useSkills==null) {
                 System.out.println("Skill did't use (not enough energy)\nDo attack again");
                 continue;
             }
+            printInfoAboutUseSkill(useSkills,round,attacker);
         }
            break;
        }
 
     }
 
-    protected void defaultAttack(int round, Droid attacker, Droid defender) {
+    public Skills useSkills(Droid attacker, Droid defender, ArrayList<Droid> attackTeam, ArrayList<Droid> defenderTeam) {
+        SkillsCollection skillsCollection=new SkillsCollection();
+        ArrayList<Skills> allSkill=skillsCollection.createSkillArray(attackTeam,defenderTeam);
+        skillsCollection.printArray(allSkill);
+        Skills selectedSkill = skillsCollection.chooseSkills(allSkill);
+        if (selectedSkill.isCanUsed(attacker)) {
+            skills.addSkill(selectedSkill,attacker,defender,attackTeam,defenderTeam);
+            return selectedSkill;
+        }
+        return null;
+    }
+    protected int defaultAttack( Droid attacker, Droid defender,ArrayList<Droid> attackTeam) {
         int powerOfAttack;
         int healthDecrease;
+        if(attacker instanceof HealDroid){
+            HealDroid healDroid =(HealDroid)attacker;
+            powerOfAttack = healDroid.doHit(attackTeam);
+        }else {
         powerOfAttack = attacker.doHit();
+        }
         healthDecrease = defender.getHit(powerOfAttack);
-        printInfoAboutAttack(round, attacker, defender,  healthDecrease);
+       return healthDecrease;
 
     }
 
@@ -66,7 +85,7 @@ public class templateArena {
         new Scanner(System.in).nextLine();
     }
 
-    protected void printInfoAboutDroids(ArrayList<Droid> firstTeam, ArrayList<Droid> secondTeam) {
+    protected void printInfoAboutDroids() {
         System.out.println("------------------");
         System.out.println("Info about droids");
         System.out.println("First Team:");
@@ -129,23 +148,37 @@ public class templateArena {
     protected void computerAttack(int round,ArrayList<Droid> attackTeam,ArrayList<Droid> defenceTeam) {
         Random random = new Random();
         Droid attacker=randomDroid(attackTeam);
-        SkillsCollection skillsCollection = new SkillsCollection();
         int typeOfAttack =random.nextInt(3);
 
         if(typeOfAttack==0){
-             ArrayList<Skills> skillArray=skillsCollection.createSkillArray( attackTeam,  defenceTeam);
-            int numOfSkill =  skills.numOfSkillWhichCanUse(attacker.getEnergy(),skillArray);
-            if(numOfSkill !=0){
-                Skills randomSkill = skills.randomSkillFromBorder(numOfSkill,skillArray);
-                skills.addSkill(randomSkill,attacker,randomDroid(defenceTeam),attackTeam,defenceTeam);
-                System.out.println("Round "+round);
-                System.out.println("\n"+randomSkill.getName() +" use by "+attacker.getName());
-                return;
-            }
+            Skills useSkill=useRandomSkill(attacker,attackTeam,defenceTeam);
+             if(useSkill!=null){
+                 printInfoAboutUseSkill(useSkill,round,attacker);
+                 return;
+             }
         }
-        defaultAttack(round,attacker,randomDroid(defenceTeam));
+        Droid defender=randomDroid(defenceTeam);
+        int powerOfAttack= defaultAttack(attacker,defender,attackTeam);
+        printInfoAboutAttack(round, attacker, defender, powerOfAttack );
     }
 
+    private void printInfoAboutUseSkill(Skills randomSkill,int round,Droid attacker) {
+        System.out.println("Round "+round);
+        System.out.println("\n"+randomSkill.getName() +" use by "+attacker.getName());
+    }
+
+
+    private Skills useRandomSkill(Droid attacker,ArrayList<Droid> attackTeam,ArrayList<Droid> defenceTeam){
+        SkillsCollection skillsCollection = new SkillsCollection();
+        ArrayList<Skills> skillArray=skillsCollection.createSkillArray( attackTeam,  defenceTeam);
+        int numOfSkill =  skills.numOfSkillWhichCanUse(attacker.getEnergy(),skillArray);
+        if(numOfSkill !=0){
+            Skills randomSkill = skills.randomSkillFromBorder(numOfSkill,skillArray);
+            skills.addSkill(randomSkill,attacker,randomDroid(defenceTeam),attackTeam,defenceTeam);
+            return randomSkill;
+        }
+        return null;
+    }
     protected Droid chooseDroidFromTeam(ArrayList<Droid> team) {
         if(team.size()==1){
             return team.get(0);
@@ -164,9 +197,7 @@ public class templateArena {
             System.out.println("The winner is Second team!");
         }
     }
-    protected void GameOver(){
-        skills.EndAllSkill();
-    }
+
     protected boolean isEnd(){
         return firstTeam.isEmpty() || secondTeam.isEmpty();
     }

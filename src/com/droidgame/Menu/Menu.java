@@ -7,6 +7,7 @@ import com.droidgame.arena.PlayerVSComputer;
 import com.droidgame.arena.PlayerVSPlayer;
 import com.droidgame.arena.templateArena;
 import com.droidgame.model.Droid;
+import com.droidgame.model.HealDroid;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,7 +41,13 @@ public class Menu {
     private ArrayList<Droid> SaveData(DroidCollection droidCollection){
         ArrayList<Droid> copyArray =new ArrayList<>();
         for (int i = 0; i < droidCollection.getArray().size(); i++) {
-            Droid save = new Droid(droidCollection.getArray().get(i));
+            Droid tmp=droidCollection.getArray().get(i);
+            Droid save;
+            if(tmp instanceof HealDroid){
+                 save = new HealDroid(tmp);
+            }else {
+             save = new Droid(tmp);
+            }
             copyArray.add(save);
         }
         return copyArray;

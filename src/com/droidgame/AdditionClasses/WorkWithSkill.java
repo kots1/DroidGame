@@ -1,7 +1,5 @@
 package com.droidgame.AdditionClasses;
 
-import com.droidgame.AdditionClasses.Collection.SkillsCollection;
-import com.droidgame.Skills.CurrentUsedSkill;
 import com.droidgame.Skills.SingleSkill.SingleSkill;
 import com.droidgame.Skills.Skills;
 import com.droidgame.Skills.TeamSkill.TeamSkill;
@@ -16,7 +14,7 @@ public class WorkWithSkill {
     private ArrayList<CurrentUsedSkill> usedSkill;
 
     public WorkWithSkill() {
-        usedSkill = new ArrayList<>();;
+        usedSkill = new ArrayList<>();
     }
 
     public int numOfSkillWhichCanUse(int energy, ArrayList<Skills> skillsArray){
@@ -44,19 +42,6 @@ public class WorkWithSkill {
         return skills.get(randomSkill);
     }
 
-    public boolean useSkills(Droid attacker, Droid defender, ArrayList<Droid> attackTeam, ArrayList<Droid> defenderTeam) {
-        SkillsCollection skillsCollection=new SkillsCollection();
-        ArrayList<Skills> allSkill=skillsCollection.createSkillArray(attackTeam,defenderTeam);
-        skillsCollection.printArray(allSkill);
-        Skills selectedSkill = skillsCollection.chooseSkills(allSkill);
-        if (selectedSkill.isCanUsed(attacker)) {
-            System.out.println(selectedSkill.getName() +" use by "+attacker.getName());
-            addSkill(selectedSkill,attacker, defender,attackTeam,defenderTeam);
-            return true;
-        }
-        return false;
-    }
-
 
 
     public void addSkill(Skills skill, Droid attacker, Droid defender,  ArrayList<Droid> attackTeam,ArrayList<Droid>defenceTeam){
@@ -68,11 +53,7 @@ public class WorkWithSkill {
         }
         usedSkill.add(newSkill);
     }
-    public void EndAllSkill(){
-        for (CurrentUsedSkill skills:usedSkill){
-            skills.end();
-        }
-    }
+
     public void doEveryRoundSkill() {
         if (usedSkill.isEmpty()) {
             return;

@@ -1,21 +1,16 @@
 package com.droidgame.AdditionClasses.Collection;
 
-import com.droidgame.Skills.SingleSkill.everyRoundSkillExamples.damageEveryRound;
-import com.droidgame.Skills.SingleSkill.everyRoundSkillExamples.healthEveryRound;
+import com.droidgame.Skills.SingleSkill.periodSkillExamples.damageEveryRound;
 import com.droidgame.Skills.SingleSkill.oneRoundSkillEample.AttackFreeze;
 import com.droidgame.Skills.SingleSkill.oneRoundSkillEample.DefenceFreeze;
-import com.droidgame.Skills.SingleSkill.oneRoundSkillEample.Recovery;
 import com.droidgame.Skills.SingleSkill.periodSkillExamples.AttackBoost;
 import com.droidgame.Skills.Skills;
 import com.droidgame.Skills.SingleSkill.periodSkillExamples.DefenceBoost;
 import com.droidgame.Skills.TeamSkill.AttackTeamSkill.ComboAttack;
 import com.droidgame.Skills.TeamSkill.AttackTeamSkill.TeamAttackFreeze;
 import com.droidgame.Skills.TeamSkill.AttackTeamSkill.TeamDamageEveryRound;
-import com.droidgame.Skills.TeamSkill.AttackTeamSkill.TeamDecreaseDamage;
 import com.droidgame.Skills.TeamSkill.DefenceTeamSkill.TeamAttackBoost;
 import com.droidgame.Skills.TeamSkill.DefenceTeamSkill.TeamDefenceBoost;
-import com.droidgame.Skills.TeamSkill.DefenceTeamSkill.TeamRecovery;
-import com.droidgame.Skills.TeamSkill.DefenceTeamSkill.TeamRecoveryEveryRound;
 import com.droidgame.model.Droid;
 
 import java.util.*;
@@ -36,8 +31,6 @@ public class SkillsCollection {
 
     private void initializationDefenceTeamSkills() {
         defenceTeamSkills = new ArrayList<>();
-        defenceTeamSkills.add(new TeamRecovery());
-        defenceTeamSkills.add(new TeamRecoveryEveryRound());
         defenceTeamSkills.add(new TeamAttackBoost());
         defenceTeamSkills.add(new TeamDefenceBoost());
     }
@@ -47,15 +40,12 @@ public class SkillsCollection {
         attackTeamSkills.add(new ComboAttack());
         attackTeamSkills.add(new TeamAttackFreeze());
         attackTeamSkills.add(new TeamDamageEveryRound());
-        attackTeamSkills.add(new TeamDecreaseDamage());
 
     }
 
     private void initializationSingleSkill(){
         singleSkills = new ArrayList<>();
-        singleSkills.add(new Recovery());
         singleSkills.add(new AttackBoost());
-        singleSkills.add(new healthEveryRound());
         singleSkills.add(new DefenceBoost());
         singleSkills.add(new damageEveryRound());
         singleSkills.add(new DefenceFreeze());
